@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config(); // require the env file
 const mongoose = require("mongoose"); // require the database
 
 // connect to the database
