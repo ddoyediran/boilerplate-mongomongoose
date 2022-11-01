@@ -1,5 +1,5 @@
 require("dotenv").config(); // require the env file
-const mongoose = require("mongoose"); // require the database
+const mongoose = require("mongoose"); // require or reference mongoose
 
 // connect to the database
 mongoose.connect(process.env.MONGO_URI, {
@@ -7,7 +7,22 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 });
 
-let Person;
+// define the person Schema
+let Person = new mongoose.Schema({
+  firstname: {
+    type: String,
+    required: true,
+  },
+  lastname: {
+    type: String,
+    required: true,
+  },
+  age: {
+    type: Number,
+    minLength: 1,
+    maxLength: 3,
+  },
+});
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
