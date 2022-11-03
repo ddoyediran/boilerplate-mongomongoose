@@ -9,11 +9,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // define the person Schema
 let Person = new mongoose.Schema({
-  firstname: {
-    type: String,
-    required: true,
-  },
-  lastname: {
+  name: {
     type: String,
     required: true,
   },
@@ -21,6 +17,9 @@ let Person = new mongoose.Schema({
     type: Number,
     minLength: 1,
     maxLength: 3,
+  },
+  favoriteFoods: {
+    type: [String],
   },
 });
 
