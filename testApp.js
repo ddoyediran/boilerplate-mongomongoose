@@ -56,3 +56,12 @@ EmailModel.findOneAndUpdate(
   .catch((err) => {
     console.log(err);
   });
+
+// Delete record
+EmailModel.findOneAndRemove({ email: "ad22@m.com" })
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
