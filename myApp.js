@@ -8,7 +8,7 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 // define the person Schema
-let Person = new mongoose.Schema({
+let personSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -22,6 +22,9 @@ let Person = new mongoose.Schema({
     type: [String],
   },
 });
+
+// to create a person model from the schema
+let Person = mongoose.model("Person", personSchema);
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
