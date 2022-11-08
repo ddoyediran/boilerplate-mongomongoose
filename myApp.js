@@ -115,14 +115,50 @@ const findEditThenSave = (personId, done) => {
   });
 };
 
+// update a single person data and search by name
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
 
-  done(null /*, data*/);
-};
+  Person.findOneAndUpdate(
+    { name: personName },
+    { age: ageToSet },
+    { new: true },
+    function (err, data) {
+      if (err) {
+        return console.error(err);
+      }
+      done(null, data);
+    }
+  );
 
-const removeById = (personId, done) => {
-  done(null /*, data*/);
+  //   Person.findOneAndUpdate(
+  //     { name: personName },
+  //     function (err, data) {
+  //       if (err) {
+  //         return console.error(err);
+  //       }
+
+  //       data.age = ageToSet;
+  //       data.save(function (err, updatedData) {
+  //         if (err) {
+  //           return console.error(err);
+  //         }
+  //         done(null, updatedData);
+  //       });
+  //     },
+  //     {
+  //       new: true,
+  //     }
+  //   );
+  // };
+
+  // const removeById = (personId, done) => {
+  //   Person.findByIdAndRemove(personId, function (err, data) {
+  //     if (err) {
+  //       return console.error(err);
+  //     }
+  //     done(null, data);
+  //   });
 };
 
 const removeManyPeople = (done) => {
