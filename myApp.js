@@ -73,6 +73,7 @@ const findPeopleByName = (personName, done) => {
   });
 };
 
+// to find a data by a particular food
 const findOneByFood = (food, done) => {
   Person.findOne({ favoriteFoods: food }, function (err, data) {
     if (err) {
@@ -82,14 +83,36 @@ const findOneByFood = (food, done) => {
   });
 };
 
+// find a person by an id
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, function (err, data) {
+    if (err) {
+      return console.error(err);
+    }
+    done(null, data);
+  });
 };
 
+// to edit the person document
 const findEditThenSave = (personId, done) => {
-  const foodToAdd = "hamburger";
+  const foodToAdd = "hamburger"; // new food to add
 
-  done(null /*, data*/);
+  // find the person by id
+  Person.findById(personId, function (err, data) {
+    if (err) {
+      return console.error(err);
+    }
+    // to add the new food to favoriteFoods array
+    data.favoriteFoods.push(foodToAdd);
+
+    // to save the document person
+    data.save(function (err, updatedData) {
+      if (err) {
+        return console.error(err);
+      }
+      done(null, updatedData);
+    });
+  });
 };
 
 const findAndUpdate = (personName, done) => {
