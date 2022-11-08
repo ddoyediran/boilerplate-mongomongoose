@@ -27,11 +27,40 @@ let personSchema = new mongoose.Schema({
 let Person = mongoose.model("Person", personSchema);
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  // create a person with the instance of the Person Model
+  const onePerson = new Person({
+    name: "Dami O",
+    age: 15,
+    favoriteFoods: "Pad thai",
+  });
+
+  onePerson.save(function (error, data) {
+    // if report the error
+    if (error) {
+      return console.error(error);
+    }
+    // done or save
+    done(null, data);
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  const manyPeople = Person.create(arrayOfPeople);
+
+  manyPeople.save(function (error, data) {
+    if (error) {
+      return console.error(error);
+    }
+    done(null, data);
+  });
+
+  // alternative
+  Person.create(arrayOfPeople, function (err, data) {
+    if (err) {
+      return console.error(err);
+    }
+    done(null, data);
+  });
 };
 
 const findPeopleByName = (personName, done) => {
