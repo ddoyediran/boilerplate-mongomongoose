@@ -161,6 +161,7 @@ const findAndUpdate = (personName, done) => {
   //   });
 };
 
+// Delete Many Documents with model.remove()
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
   Person.remove({ name: nameToRemove }, function (err, data) {
@@ -173,8 +174,18 @@ const removeManyPeople = (done) => {
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
+  const queryResult = Person.find({ favoriteFoods: foodToSearch });
 
-  done(null /*, data*/);
+  queryResult
+    .sort({ name: -1 })
+    .limit(5)
+    .select({ favoriteFoods: 0 })
+    .exec(function (err, data) {
+      if (err) {
+        return console.error(err);
+      }
+      done(null, data);
+    });
 };
 
 /** **Well Done !!**
